@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+# Configure your Nginx server to /redirect_me is redirecting to another page
+sudo apt-get update -y
+sudo apt-get install nginx -y
+sudo chown -R ubuntu /var/www
+echo 'Hello World' > /var/www/html/index.nginx-debian.html
+echo "Ceci n'est pas une page" > /var/www/html/error_404.html
+sudo service nginx start
+sudo sed -i "s/server_name _;/server_name _;\n\trewrite ^\/redirect_me https:\/\/www.youtube.com\/watch?v=aBt8fN7mJNg\&ab_channel=BackstreetBoysVEVO permanent;/" /etc/nginx/sites-available/default
+sudo sed -i "s/^server\s{/server {\n\terror_page 404 \/error_404.html;/1" /etc/nginx/sites-available/default
+sudo service nginx restart
