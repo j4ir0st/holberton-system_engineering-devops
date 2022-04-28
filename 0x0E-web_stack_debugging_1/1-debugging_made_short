@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
 # script that configures nginx port 80
-sudo pkill -9 nginx
 sudo sed -i "s/8080/80/g" /etc/nginx/sites-enabled/default
-sudo service nginx start
+sudo pkill -1 nginx
