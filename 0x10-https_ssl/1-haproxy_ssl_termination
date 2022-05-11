@@ -41,7 +41,7 @@ frontend http
 
 # Configure frontend (https-www) listen all *:443 and solve with backend (my-servers)
 frontend https-www
-        bind *:443 ssl crt /etc/letsencrypt/live/www.cristhian.tech/haproxy.pem
+        bind *:443 ssl crt /etc/letsencrypt/live/www.jairocast.tech/haproxy.pem
         http-request set-header X-Forwarded-Proto https
         default_backend my-servers
 
