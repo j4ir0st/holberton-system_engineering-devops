@@ -47,6 +47,6 @@ frontend https-www
 
 backend my-servers
         balance roundrobin
-        redirect scheme https if !{ ssl_fc }
+        redirect scheme https code 301 if !{ ssl_fc }
         server 3735-web-01 35.227.55.132:80 check
         server 3735-web-02 34.207.110.152:80 check
