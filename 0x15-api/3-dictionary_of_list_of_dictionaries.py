@@ -12,15 +12,15 @@ from sys import argv
 def request_rest_api():
     """ make request to the API """
     url = "https://jsonplaceholder.typicode.com/"
-    user = requests.get("{}users".format(url)).json()[0]
+    user = requests.get("{}users".format(url)).json()
     data = {}
     for l_user in user:
-        user_id = user['id']
+        user_id = l_user['id']
         tasks = requests.get("{}todos?userId={}".format(url, user_id)).json()
         lst = []
         for rev in tasks:
             lst.append({
-                "username": user['username'],
+                "username": l_user['username'],
                 "task": rev['title'],
                 "completed": rev['completed'],
             })
