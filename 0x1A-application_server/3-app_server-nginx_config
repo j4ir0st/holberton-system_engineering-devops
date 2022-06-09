@@ -1,0 +1,32 @@
+server {
+        add_header X-Served-By 3735-web-01;
+        error_page 404 /error_404.html;
+        listen 80 default_server;
+        listen [::]:80 default_server;
+
+        root /var/www/html;
+
+        server_name _;
+
+        location /hbnb_static/ {
+                alias /data/web_static/current/;
+        }
+
+        rewrite ^/redirect_me https://www.youtube.com/watch?v=aBt8fN7mJNg&ab_channel=BackstreetBoysVEVO permanent;
+
+        location / {
+                # First attempt to serve request as file, then
+                # as directory, then fall back to displaying a 404.
+                try_files $uri $uri/ =404;
+        }
+
+        location /airbnb-onepage/ {
+                include proxy_params;
+                proxy_pass http://0.0.0.0:5000/airbnb-onepage/;
+       }
+
+       location /airbnb-dynamic/number_odd_or_even/ {
+                include proxy_params;
+                proxy_pass http://0.0.0.0:5001/number_odd_or_even/;
+       }
+}
